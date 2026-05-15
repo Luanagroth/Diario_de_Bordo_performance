@@ -23,13 +23,13 @@ A aplicação permite cadastrar entradas com título, descrição e data, listar
 
 ## Demonstração
 
-### Desktop
+### Área de trabalho
 
-![Demonstração desktop do Diário de Bordo](./screenshots/desktop.png)
+![Diário de Bordo - Desktop](./screenshots/desktop.png)
 
-### Mobile
+### Móvel
 
-![Demonstração mobile do Diário de Bordo](./screenshots/mobile.png)
+![Diário de Bordo - Mobile](./screenshots/mobile.png)
 
 ---
 
