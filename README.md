@@ -13,7 +13,7 @@ O **Diário de Bordo — Versão Performance** é a segunda versão do aplicativ
 
 A **primeira versão** foi desenvolvida como um **Progressive Web App (PWA)** para registro de atividades diárias, com CRUD local, persistência em `localStorage`, funcionamento offline e suporte à instalação no dispositivo.
 
-Esta **segunda versão** parte da aplicação original e evolui o projeto para um contexto mais técnico: investigação de gargalos, auditoria com **Lighthouse**, análise com **Chrome DevTools**, ajustes no **Service Worker**, otimização de assets, minificação de arquivos e comparação dos resultados antes/depois.
+Esta **segunda versão** parte da aplicação original e evolui o projeto para um contexto mais técnico: investigação de gargalos, auditoria com **Lighthouse**, análise com **Chrome DevTools**, ajustes no **Service Worker**, otimização de Assets, minificação de arquivos e comparação dos resultados antes/depois.
 
 O objetivo não foi reconstruir a interface do zero, mas sim demonstrar como uma aplicação funcional pode ser medida, analisada e otimizada de forma incremental, mantendo sua proposta original e melhorando sua base técnica para futuras evoluções.
 
@@ -31,7 +31,7 @@ O estudo teve como objetivos:
 - Comparar resultados antes/depois das melhorias.
 - Documentar o impacto técnico das alterações realizadas.
 
-Foram estudados pontos como estratégia de cache, atualização de arquivos offline, minificação, formatos modernos de imagem, remoção de duplicidades, estrutura de build e leitura crítica dos relatórios de performance.
+Foram estudados pontos como estratégia de cache, atualização de arquivos offline, minificação, formatos modernos de imagem, remoção de duplicidades, estrutura de Build e leitura crítica dos relatórios de performance.
 
 ---
 
@@ -114,14 +114,14 @@ As imagens de demonstração foram otimizadas para melhorar a documentação e r
 
 ### Build
 
-Foi adicionada uma etapa simples de build para preparar os arquivos estáticos:
+Foi adicionada uma etapa simples de Build para preparar os arquivos estáticos:
 
 - Criação do script `scripts/build.js`.
 - Geração de `script.min.js`.
 - Geração de `estilo.min.css`.
 - Disponibilização do comando `npm run build`.
 
-A proposta do build é manter o projeto simples, sem frameworks, mas com um fluxo mínimo de otimização para entrega.
+A proposta do Build é manter o projeto simples, sem frameworks, mas com um fluxo mínimo de otimização para entrega.
 
 ---
 
@@ -304,7 +304,7 @@ Esta versão consolidou aprendizados importantes sobre análise técnica e otimi
 - Implementação de PWA com manifest e Service Worker.
 - Configuração de funcionamento offline.
 - Análise de performance com Lighthouse e DevTools.
-- Otimização de assets e arquivos estáticos.
+- Otimização de Assets e arquivos estáticos.
 - Criação de documentação técnica para portfólio.
 
 ---
