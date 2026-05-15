@@ -9,6 +9,14 @@
 
 O **Diário de Bordo — Versão Performance** é a segunda versão do aplicativo **Diário de Bordo**, criada com foco em estudo, análise técnica e otimização de performance web.
 
+## Demonstração online
+
+Acesse a aplicação publicada:
+
+https://diario-de-bordo-performance.vercel.app
+
+[![Demo Online](https://img.shields.io/badge/Demo-Online-success?style=for-the-badge)](https://diario-de-bordo-performance.vercel.app)
+
 > Esta é uma evolução técnica do projeto original, criada para estudo prático de performance web, otimização incremental e análise de métricas utilizando Lighthouse e Chrome DevTools.
 
 A **primeira versão** foi desenvolvida como um **Progressive Web App (PWA)** para registro de atividades diárias, com CRUD local, persistência em `localStorage`, funcionamento offline e suporte à instalação no dispositivo.
