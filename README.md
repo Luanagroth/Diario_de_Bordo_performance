@@ -21,6 +21,18 @@ A aplicação permite cadastrar entradas com título, descrição e data, listar
 
 ---
 
+## Demonstração
+
+### Desktop
+
+![Demonstração desktop do Diário de Bordo](./screenshots/desktop.png)
+
+### Mobile
+
+![Demonstração mobile do Diário de Bordo](./screenshots/mobile.png)
+
+---
+
 ## Sobre o Projeto
 
 Este projeto tem como objetivo demonstrar uma base sólida de desenvolvimento frontend sem dependências externas, explorando recursos nativos do navegador para criar uma experiência próxima a um aplicativo instalado.
@@ -120,32 +132,25 @@ Pasta dedicada aos ícones do PWA. Os arquivos `icon-192.png` e `icon-512.png` s
 
 ## Tecnologias e Justificativas
 
-| Tecnologia | Área | Motivo da escolha |
-| --- | --- | --- |
-| HTML5 | Estrutura | Permite uma base semântica, acessível e adequada para aplicações web modernas. |
-| CSS3 | Interface | Oferece controle visual completo sem frameworks, com responsividade, variáveis e estados interativos. |
-| JavaScript puro | Comportamento | Demonstra domínio dos fundamentos do navegador sem dependência de bibliotecas externas. |
-| DOM API | Interatividade | Permite criar, atualizar e remover elementos dinamicamente na tela. |
-| localStorage | Persistência local | Solução simples e nativa para armazenar entradas diretamente no navegador. |
-| Service Worker | Offline | Viabiliza cache de arquivos essenciais e funcionamento sem conexão. |
-| Web App Manifest | PWA | Define metadados para instalação e experiência standalone. |
-| beforeinstallprompt | Instalação | Permite controlar a exibição do botão de instalação quando o navegador disponibiliza o evento. |
+- HTML5
+- CSS3
+- JavaScript
+- LocalStorage
+- PWA
+- Service Worker
 
 ---
 
 ## Funcionalidades
 
-- Cadastro de entradas com título, descrição e data.
-- Validação de campos obrigatórios.
-- Listagem dinâmica das entradas cadastradas.
-- Edição de entradas existentes.
-- Remoção de entradas.
-- Persistência local com `localStorage`.
-- Carregamento automático dos dados ao abrir a aplicação.
-- Funcionamento offline com Service Worker.
-- Instalação como aplicativo PWA quando suportado pelo navegador.
-- Interface responsiva para desktop e mobile.
-- Feedback visual com botões, foco e hover suave.
+- ✔ Criar entradas
+- ✔ Editar entradas
+- ✔ Remover entradas
+- ✔ Persistência com localStorage
+- ✔ Funcionamento offline
+- ✔ Instalação como PWA
+- ✔ Service Worker
+- ✔ Responsividade
 
 ---
 
@@ -164,6 +169,12 @@ Este projeto demonstra competências importantes em desenvolvimento frontend mod
 - Responsividade com CSS puro.
 - Uso de variáveis CSS e design consistente.
 - Estrutura HTML semântica.
+
+---
+
+## Aprendizados
+
+Durante o desenvolvimento do Diário de Bordo, foram praticados conceitos essenciais de frontend moderno, incluindo manipulação do DOM para criar e atualizar elementos dinamicamente, persistência local com `localStorage`, configuração de PWA com manifest e instalação, uso de Service Worker para cache offline e construção de uma interface responsiva para desktop e mobile.
 
 ---
 
@@ -249,3 +260,15 @@ http://localhost:3000
 ## Status do Projeto
 
 🚀 Projeto funcional em versão inicial, com base PWA implementada e preparado para evoluções futuras.
+
+---
+
+## Contato
+
+**Luana Groth**
+
+Desenvolvedora Full Stack em formação, focada em desenvolvimento web e construção de aplicações modernas.
+
+- **GitHub:** <https://github.com/Luanagroth>
+- **LinkedIn:** <https://www.linkedin.com/in/luanagroth/>
+- **Portfólio:** <https://luana-groth-portfolio.vercel.app>

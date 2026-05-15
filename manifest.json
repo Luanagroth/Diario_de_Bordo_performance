@@ -2,6 +2,7 @@
   "name": "Diário de Bordo",
   "short_name": "Diário",
   "description": "Aplicativo para registrar, editar, listar e remover entradas de diário com persistência local e suporte offline.",
+  "id": "/index.html",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
@@ -12,13 +13,26 @@
       "src": "./icons/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
       "src": "./icons/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "./screenshots/desktop.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
+    },
+    {
+      "src": "./screenshots/mobile.png",
+      "sizes": "390x844",
+      "type": "image/png"
     }
   ]
 }

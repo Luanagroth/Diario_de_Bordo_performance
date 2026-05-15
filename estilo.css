@@ -67,7 +67,7 @@ h2 {
 main {
   display: grid;
   gap: var(--espaco-lg);
-  padding-bottom: 5rem;
+  padding-bottom: 6.5rem;
 }
 
 section {
@@ -252,14 +252,18 @@ button[type="submit"]:hover {
     padding: var(--espaco-md);
   }
 
+  main {
+    padding-bottom: 7.25rem;
+  }
+
   button {
     width: 100%;
   }
 
   #botao-instalar {
-    right: var(--espaco-xs);
-    bottom: var(--espaco-xs);
-    left: var(--espaco-xs);
+    right: var(--espaco-sm);
+    bottom: var(--espaco-sm);
+    left: var(--espaco-sm);
     width: auto;
   }
 }
