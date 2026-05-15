@@ -127,6 +127,12 @@ button {
   transition: background-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
 }
 
+button[type="submit"],
+.botao-editar,
+.botao-remover {
+  color: #ffffff;
+}
+
 button:hover {
   transform: translateY(-1px);
 }
@@ -142,7 +148,6 @@ button:focus-visible {
 
 button[type="submit"] {
   background: var(--cor-primaria);
-  color: #ffffff;
   box-shadow: 0 10px 22px rgba(31, 79, 70, 0.22);
 }
 
@@ -218,7 +223,6 @@ button[type="submit"]:hover {
 
 .botao-editar {
   background: var(--cor-primaria);
-  color: #ffffff;
 }
 
 .botao-editar:hover {
@@ -227,7 +231,6 @@ button[type="submit"]:hover {
 
 .botao-remover {
   background: var(--cor-perigo);
-  color: #ffffff;
 }
 
 .botao-remover:hover {

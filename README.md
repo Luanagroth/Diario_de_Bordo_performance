@@ -1,216 +1,264 @@
-# Diário de Bordo
+# Diário de Bordo — Versão Performance
 
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=111111)
 ![PWA](https://img.shields.io/badge/PWA-5A0FC8?style=for-the-badge&logo=pwa&logoColor=white)
-![localStorage](https://img.shields.io/badge/localStorage-1F2937?style=for-the-badge&logo=webcomponents.org&logoColor=white)
 ![Service Worker](https://img.shields.io/badge/Service%20Worker-0F766E?style=for-the-badge&logo=googlechrome&logoColor=white)
+![Lighthouse](https://img.shields.io/badge/Lighthouse-F44B21?style=for-the-badge&logo=lighthouse&logoColor=white)
 
-> Progressive Web App para registro de atividades diárias, com persistência local, funcionamento offline e suporte à instalação no dispositivo.
+O **Diário de Bordo — Versão Performance** é a segunda versão do aplicativo **Diário de Bordo**, criada com foco em estudo, análise técnica e otimização de performance web.
+
+> Esta é uma evolução técnica do projeto original, criada para estudo prático de performance web, otimização incremental e análise de métricas utilizando Lighthouse e Chrome DevTools.
+
+A **primeira versão** foi desenvolvida como um **Progressive Web App (PWA)** para registro de atividades diárias, com CRUD local, persistência em `localStorage`, funcionamento offline e suporte à instalação no dispositivo.
+
+Esta **segunda versão** parte da aplicação original e evolui o projeto para um contexto mais técnico: investigação de gargalos, auditoria com **Lighthouse**, análise com **Chrome DevTools**, ajustes no **Service Worker**, otimização de assets, minificação de arquivos e comparação dos resultados antes/depois.
+
+O objetivo não foi reconstruir a interface do zero, mas sim demonstrar como uma aplicação funcional pode ser medida, analisada e otimizada de forma incremental, mantendo sua proposta original e melhorando sua base técnica para futuras evoluções.
 
 ---
 
-## Descrição do Projeto
+## Sobre esta versão
 
-O **Diário de Bordo** é um aplicativo frontend desenvolvido como **Progressive Web App (PWA)** para registrar atividades, anotações e acontecimentos do dia a dia de forma simples, rápida e acessível.
+Esta versão foi criada a partir da aplicação original e evoluída com foco em **análise e otimização de performance**.
 
-O projeto foi construído com **HTML5, CSS3 e JavaScript puro**, priorizando fundamentos da web moderna, organização de código, responsividade, persistência no navegador e experiência offline por meio de **Service Worker** e **Web App Manifest**.
+O estudo teve como objetivos:
 
-A aplicação permite cadastrar entradas com título, descrição e data, listar registros dinamicamente, editar ou remover itens e manter os dados salvos no navegador usando `localStorage`.
+- Identificar gargalos técnicos na entrega dos arquivos estáticos.
+- Analisar métricas e comportamento da aplicação com Lighthouse e DevTools.
+- Aplicar otimizações reais sem descaracterizar o projeto original.
+- Comparar resultados antes/depois das melhorias.
+- Documentar o impacto técnico das alterações realizadas.
+
+Foram estudados pontos como estratégia de cache, atualização de arquivos offline, minificação, formatos modernos de imagem, remoção de duplicidades, estrutura de build e leitura crítica dos relatórios de performance.
 
 ---
 
 ## Demonstração
 
-### Área de trabalho
+### Desktop
 
-![Diário de Bordo - Desktop](./screenshots/desktop.png)
+![Diário de Bordo - Desktop](./screenshots/desktop.webp)
 
-### Móvel
+### Mobile
 
-![Diário de Bordo - Mobile](./screenshots/mobile.png)
-
----
-
-## Sobre o Projeto
-
-Este projeto tem como objetivo demonstrar uma base sólida de desenvolvimento frontend sem dependências externas, explorando recursos nativos do navegador para criar uma experiência próxima a um aplicativo instalado.
-
-Do ponto de vista técnico e arquitetural, o projeto foi pensado para evidenciar:
-
-- Estrutura HTML semântica e acessível.
-- Estilização moderna com CSS puro e variáveis reutilizáveis.
-- Manipulação do DOM com JavaScript organizado em funções.
-- Persistência local com `localStorage`.
-- Funcionamento offline com estratégia simples de cache.
-- Instalação como PWA usando `manifest.json`, `service-worker.js` e `beforeinstallprompt`.
-- Separação clara entre estrutura, apresentação e comportamento.
+![Diário de Bordo - Mobile](./screenshots/mobile.webp)
 
 ---
 
-## Arquitetura e Organização
+## Comparação entre versões
 
-O projeto segue uma arquitetura frontend simples, direta e profissional, separando as responsabilidades principais em arquivos independentes.
-
-| Camada | Arquivo | Responsabilidade |
-| --- | --- | --- |
-| Estrutura | `index.html` | Define a estrutura semântica da aplicação, formulário, lista de entradas, imports e metadados PWA. |
-| Apresentação | `estilo.css` | Centraliza a identidade visual, responsividade, variáveis CSS, cards, botões e estados interativos. |
-| Comportamento | `script.js` | Controla formulário, validação, CRUD local, `localStorage`, renderização dinâmica e instalação PWA. |
-| PWA Manifest | `manifest.json` | Descreve nome, ícones, cores, modo de exibição e configurações de instalação do app. |
-| Offline | `service-worker.js` | Gerencia cache dos arquivos principais e permite uso offline. |
-| Assets | `icons/` | Armazena ícones utilizados pelo manifest para reconhecimento e instalação do PWA. |
-
-### Decisões Arquiteturais
-
-- **HTML, CSS e JS separados:** facilita manutenção, leitura e evolução do projeto.
-- **CSS com variáveis:** torna cores, espaçamentos e sombras mais consistentes.
-- **JavaScript funcional e organizado:** cada função tem uma responsabilidade clara.
-- **Cache offline simples:** adequado ao escopo de uma aplicação estática.
-- **Manifest dedicado:** permite que navegadores identifiquem o app como instalável.
-
----
-
-## Estrutura de Pastas
-
-```txt
-diario-de-bordo/
-├── icons/
-│   ├── icon-192.png
-│   └── icon-512.png
-├── estilo.css
-├── index.html
-├── manifest.json
-├── README.md
-├── script.js
-└── service-worker.js
-```
-
----
-
-## Responsabilidade de Cada Arquivo
-
-### `index.html`
-
-Arquivo principal da aplicação. Define a estrutura HTML5, incluindo cabeçalho, formulário de cadastro, botão de instalação PWA, área de listagem das entradas, importação de estilos, script, manifest e meta tag `theme-color`.
-
-### `estilo.css`
-
-Arquivo responsável pela interface visual. Contém variáveis CSS, layout centralizado, formulário estilizado, cards de entradas, botões, sombras, estados de foco, hover suave e ajustes responsivos para desktop e mobile.
-
-### `script.js`
-
-Arquivo responsável pela regra de interação da aplicação. Captura dados do formulário, valida campos, cria entradas, renderiza a lista, remove registros, salva e carrega dados do `localStorage`, registra o Service Worker e controla o fluxo de instalação do PWA.
-
-### `manifest.json`
-
-Arquivo de configuração do Web App Manifest. Informa ao navegador o nome da aplicação, nome curto, URL inicial, modo de exibição, cores do app e ícones utilizados durante a instalação.
-
-### `service-worker.js`
-
-Arquivo responsável pelo funcionamento offline. Durante a instalação do Service Worker, os principais arquivos estáticos são armazenados em cache. Em requisições futuras, a aplicação tenta responder usando o cache e aplica fallback para navegação offline.
-
-### `icons/`
-
-Pasta dedicada aos ícones do PWA. Os arquivos `icon-192.png` e `icon-512.png` são referenciados pelo manifest e utilizados pelo navegador em atalhos, telas de instalação e exibição do aplicativo.
-
----
-
-## Princípios Aplicados
-
-| Princípio | Aplicação no projeto |
-| --- | --- |
-| Separação de responsabilidades | HTML, CSS, JS, manifest e service worker possuem papéis independentes. |
-| Código limpo | Funções pequenas, nomes descritivos e estrutura previsível. |
-| Organização modular | Cada recurso principal fica em um arquivo dedicado. |
-| Responsividade | Layout adaptado para telas pequenas e grandes. |
-| Offline first | Arquivos essenciais são cacheados para uso sem conexão. |
-| Acessibilidade básica | Uso de labels, estrutura semântica e estados de foco visíveis. |
-
----
-
-## Tecnologias e Justificativas
-
-- HTML5
-- CSS3
-- JavaScript
-- LocalStorage
-- PWA
-- Service Worker
+| Recurso | Versão Original | Versão Performance |
+|----------|----------------|-------------------|
+| PWA | ✔ | ✔ |
+| LocalStorage | ✔ | ✔ |
+| CRUD | ✔ | ✔ |
+| Funcionamento Offline | ✔ | ✔ |
+| Minificação | ❌ | ✔ |
+| Build automatizado | ❌ | ✔ |
+| Screenshots otimizados | ❌ | ✔ |
+| Estratégia avançada de cache | ❌ | ✔ |
+| Relatórios Lighthouse | ❌ | ✔ |
 
 ---
 
 ## Funcionalidades
 
-- ✔ Criar entradas
-- ✔ Editar entradas
-- ✔ Remover entradas
-- ✔ Persistência com localStorage
-- ✔ Funcionamento offline
-- ✔ Instalação como PWA
-- ✔ Service Worker
-- ✔ Responsividade
+- Criar entradas de diário com título, descrição e data.
+- Editar entradas já cadastradas.
+- Remover registros.
+- Listar entradas dinamicamente na interface.
+- Persistir dados no navegador usando `localStorage`.
+- Funcionar offline após o carregamento inicial.
+- Permitir instalação como PWA.
+- Manter layout responsivo para desktop e mobile.
 
 ---
 
-## Habilidades Demonstradas
+## Gargalos identificados
 
-Este projeto demonstra competências importantes em desenvolvimento frontend moderno:
+Durante a análise da aplicação original, foram identificados pontos com potencial de melhoria:
 
-- Manipulação do DOM com JavaScript puro.
-- Criação dinâmica de componentes de interface.
-- Persistência de dados no navegador com `localStorage`.
-- Registro e uso de Service Worker.
-- Implementação de cache offline.
-- Configuração de Web App Manifest.
-- Controle do fluxo de instalação PWA com `beforeinstallprompt`.
-- Organização de projeto frontend sem frameworks.
-- Responsividade com CSS puro.
-- Uso de variáveis CSS e design consistente.
-- Estrutura HTML semântica.
+- Redundância no cache do Service Worker.
+- Risco de conteúdo obsoleto usando estratégia `cache-first`.
+- Ausência de minificação dos arquivos CSS e JavaScript.
+- Screenshots sem uso de formatos modernos.
+- Arquivos duplicados no projeto.
+
+Esses pontos não impediam o funcionamento da aplicação, mas afetavam a qualidade da entrega técnica, a manutenção do cache e a preparação do projeto para evolução.
 
 ---
 
-## Aprendizados
+## Melhorias aplicadas
 
-Durante o desenvolvimento do Diário de Bordo, foram praticados conceitos essenciais de frontend moderno, incluindo manipulação do DOM para criar e atualizar elementos dinamicamente, persistência local com `localStorage`, configuração de PWA com manifest e instalação, uso de Service Worker para cache offline e construção de uma interface responsiva para desktop e mobile.
+### Service Worker
+
+O `service-worker.js` foi ajustado para uma estratégia mais consistente de cache e atualização:
+
+- Uso de `CACHE_NAME` versionado como `diario-de-bordo-v3`.
+- Estratégia `network-first` para navegação, com fallback para `index.html` em modo offline.
+- Limpeza automática de caches antigos no evento `activate`.
+- Remoção de redundâncias na lista de arquivos essenciais em cache.
+- Cache dos arquivos principais da aplicação: HTML, CSS minificado, JavaScript minificado, manifest e ícones.
+
+Essas alterações reduzem o risco de servir conteúdo antigo e tornam o comportamento offline mais previsível.
+
+### Imagens
+
+As imagens de demonstração foram otimizadas para melhorar a documentação e reduzir peso visual:
+
+- Conversão dos screenshots para formato WebP.
+- Uso dos arquivos `desktop.webp` e `mobile.webp` no README.
+- Remoção de arquivos duplicados desnecessários no fluxo de documentação.
+
+### Build
+
+Foi adicionada uma etapa simples de build para preparar os arquivos estáticos:
+
+- Criação do script `scripts/build.js`.
+- Geração de `script.min.js`.
+- Geração de `estilo.min.css`.
+- Disponibilização do comando `npm run build`.
+
+A proposta do build é manter o projeto simples, sem frameworks, mas com um fluxo mínimo de otimização para entrega.
 
 ---
 
-## Como Executar Localmente
+## Lighthouse — Antes e Depois
+
+### Antes
+
+![Relatório Lighthouse antes](./reports/before/lighthouse-before.png)
+
+### Depois
+
+![Relatório Lighthouse depois](./reports/after/lighthouse-after.png)
+
+| Métrica | Antes | Depois |
+|----------|--------|---------|
+| Performance | 100 | 100 |
+| Accessibility | 100 | 100 |
+| Best Practices | 100 | 100 |
+| SEO | 90 | 90 |
+
+Mesmo mantendo as pontuações, as melhorias reduziram redundâncias, otimizaram recursos estáticos e melhoraram a arquitetura para futuras evoluções. A análise mostrou que performance não é apenas alcançar uma nota alta, mas também manter uma base técnica limpa, previsível e preparada para crescer.
+
+---
+
+## Arquitetura e organização
+
+O projeto mantém uma arquitetura frontend simples, separando estrutura, apresentação, comportamento e recursos PWA.
+
+| Camada | Arquivo | Responsabilidade |
+| --- | --- | --- |
+| Estrutura | `index.html` | Define a estrutura semântica da aplicação, formulário, listagem de entradas, imports e metadados PWA. |
+| Apresentação | `estilo.css` | Centraliza identidade visual, responsividade, variáveis CSS, cards, botões e estados interativos. |
+| CSS otimizado | `estilo.min.css` | Versão minificada da folha de estilos usada na entrega otimizada. |
+| Comportamento | `script.js` | Controla formulário, validação, CRUD local, `localStorage`, renderização dinâmica e instalação PWA. |
+| JS otimizado | `script.min.js` | Versão minificada do JavaScript usada na entrega otimizada. |
+| PWA Manifest | `manifest.json` | Descreve nome, ícones, cores, modo de exibição e configurações de instalação do app. |
+| Offline | `service-worker.js` | Gerencia cache, fallback offline, limpeza de caches antigos e atualização dos recursos. |
+| Build | `scripts/build.js` | Automatiza a geração dos arquivos minificados. |
+| Assets | `icons/` | Armazena ícones utilizados pelo manifest para instalação do PWA. |
+| Relatórios | `reports/` | Guarda evidências visuais dos testes Lighthouse antes e depois. |
+
+---
+
+## Estrutura de pastas
+
+```txt
+diario-de-bordo-performance/
+├── icons/
+│   ├── icon-192.png
+│   └── icon-512.png
+├── reports/
+│   ├── before/
+│   │   └── lighthouse-before.png
+│   └── after/
+│       └── lighthouse-after.png
+├── screenshots/
+│   ├── desktop.webp
+│   └── mobile.webp
+├── scripts/build.js
+├── estilo.css
+├── estilo.min.css
+├── index.html
+├── manifest.json
+├── README.md
+├── script.js
+├── script.min.js
+└── service-worker.js
+```
+
+---
+
+## Estrutura PWA implementada
+
+| Recurso | Implementação |
+| --- | --- |
+| Manifest | `manifest.json` com nome, short name, cores, modo standalone, start URL e ícones. |
+| Service Worker | `service-worker.js` com cache versionado, fallback offline e limpeza de caches antigos. |
+| Cache offline | Arquivos essenciais são armazenados para acesso sem conexão. |
+| Instalação | `beforeinstallprompt` controla a exibição do botão de instalação. |
+| Ícones | `icons/icon-192.png` e `icons/icon-512.png` preparados para o manifest. |
+| Tema | `theme_color` e meta `theme-color` alinhados para integração visual com o navegador. |
+
+---
+
+## Tecnologias
+
+- HTML5
+- CSS3
+- JavaScript
+- PWA
+- Service Worker
+- LocalStorage
+- Lighthouse
+- Chrome DevTools
+
+---
+
+## Como executar
 
 Para testar a aplicação corretamente, use um servidor local. Isso é importante porque **Service Workers não funcionam ao abrir o arquivo diretamente pelo protocolo `file://`**.
 
-Instale as dependências do projeto:
+Instale as dependências:
 
 ```bash
 npm install
 ```
 
-Inicie o servidor estático:
+Inicie o servidor local:
 
 ```bash
 npm run dev
 ```
 
-Depois, acesse:
+Acesse no navegador:
 
 ```txt
 http://localhost:3000
 ```
 
+Para gerar os arquivos minificados:
+
+```bash
+npm run build
+```
+
 ---
 
-## Como Testar o PWA
+## Como testar o PWA
 
 ### Lighthouse
 
 1. Abra a aplicação no Google Chrome.
 2. Acesse as DevTools.
 3. Abra a aba **Lighthouse**.
-4. Selecione a categoria **Progressive Web App**.
+4. Selecione as categorias desejadas.
 5. Execute a auditoria.
+6. Compare os resultados com os relatórios em `reports/before` e `reports/after`.
 
 ### Instalação
 
@@ -219,7 +267,7 @@ http://localhost:3000
 3. Clique no botão **Instalar aplicativo**, quando ele aparecer.
 4. Confirme a instalação no prompt do navegador.
 
-### Modo Offline
+### Modo offline
 
 1. Abra a aplicação em um servidor local.
 2. Acesse a aplicação ao menos uma vez para registrar o Service Worker.
@@ -230,40 +278,58 @@ http://localhost:3000
 
 ---
 
-## Estrutura PWA Implementada
+## Aprendizados
 
-| Recurso | Implementação |
-| --- | --- |
-| Manifest | `manifest.json` com nome, short name, cores, modo standalone, start URL e ícones. |
-| Service Worker | `service-worker.js` registra cache dos arquivos principais e limpa caches antigos. |
-| Cache offline | Arquivos essenciais são armazenados para acesso sem conexão. |
-| Instalação | `beforeinstallprompt` controla a exibição do botão de instalação. |
-| Ícones | `icons/icon-192.png` e `icons/icon-512.png` preparados para o manifest. |
-| Tema | `theme_color` e meta `theme-color` alinhados para integração visual com o navegador. |
+Esta versão consolidou aprendizados importantes sobre análise técnica e otimização incremental em aplicações web:
+
+- Análise de performance além da nota final do Lighthouse.
+- Uso do Chrome DevTools para investigar rede, cache, carregamento e comportamento offline.
+- Interpretação de relatórios Lighthouse antes/depois.
+- Otimização de cache com Service Worker.
+- Diferença entre estratégias `cache-first`, `network-first` e fallback offline.
+- Minificação de CSS e JavaScript.
+- Uso de formatos modernos de imagem, como WebP.
+- Identificação de gargalos técnicos em projetos já funcionais.
+- Documentação de decisões, evidências e impacto técnico.
+- Melhoria incremental sem reescrever toda a aplicação.
 
 ---
 
-## Melhorias Futuras
+## Habilidades demonstradas
 
-- Migrar persistência de `localStorage` para **IndexedDB** para suportar volumes maiores de dados.
+- Desenvolvimento frontend com HTML, CSS e JavaScript puro.
+- Manipulação do DOM sem frameworks.
+- CRUD local com persistência em `localStorage`.
+- Organização de projeto frontend em arquivos separados.
+- Implementação de PWA com manifest e Service Worker.
+- Configuração de funcionamento offline.
+- Análise de performance com Lighthouse e DevTools.
+- Otimização de assets e arquivos estáticos.
+- Criação de documentação técnica para portfólio.
+
+---
+
+## Melhorias futuras
+
+- Migrar persistência de `localStorage` para IndexedDB para suportar volumes maiores de dados.
 - Adicionar autenticação para perfis individuais.
 - Implementar sincronização em nuvem.
 - Criar notificações push para lembretes.
 - Adicionar categorias ou tags para organizar entradas.
 - Incluir filtros por data, título ou categoria.
 - Adicionar exportação de registros em JSON ou CSV.
-- Melhorar estratégia de cache com atualização em segundo plano.
+- Evoluir a estratégia de cache com atualização em segundo plano.
 - Adicionar testes automatizados para funções principais.
 
 ---
 
-## Status do Projeto
+## Status do projeto
 
-🚀 Projeto funcional em versão inicial, com base PWA implementada e preparado para evoluções futuras.
+Projeto funcional em versão de estudo de performance, com base PWA implementada, otimizações aplicadas e documentação preparada para GitHub e portfólio.
 
 ---
 
-## Contato
+## Autora
 
 **Luana Groth**
 
