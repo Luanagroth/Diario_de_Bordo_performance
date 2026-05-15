@@ -1,0 +1,286 @@
+const formEntrada = document.getElementById("form-entrada");
+const campoTitulo = document.getElementById("titulo");
+const campoDescricao = document.getElementById("descricao");
+const campoData = document.getElementById("data");
+const listaEntradas = document.getElementById("lista-entradas");
+const botaoInstalar = document.getElementById("botao-instalar");
+const botaoFormulario = formEntrada.querySelector("button[type='submit']");
+
+const CHAVE_STORAGE = "diarioDeBordoEntradas";
+
+let entradas = [];
+let eventoInstalacao = null;
+let entradaEmEdicaoId = null;
+
+function removerEntradasSalvasInvalidas() {
+  try {
+    localStorage.removeItem(CHAVE_STORAGE);
+  } catch (erro) {
+    console.error("Não foi possível remover dados inválidos do localStorage.", erro);
+  }
+}
+
+function carregarEntradas() {
+  try {
+    const entradasSalvas = localStorage.getItem(CHAVE_STORAGE);
+    const entradasRecuperadas = entradasSalvas ? JSON.parse(entradasSalvas) : [];
+
+    if (!Array.isArray(entradasRecuperadas)) {
+      console.warn("Dados salvos em localStorage não estão no formato esperado. A lista será reiniciada.");
+      entradas = [];
+      removerEntradasSalvasInvalidas();
+      return;
+    }
+
+    entradas = entradasRecuperadas;
+  } catch (erro) {
+    console.error("Não foi possível carregar as entradas salvas no localStorage.", erro);
+    entradas = [];
+    removerEntradasSalvasInvalidas();
+  }
+}
+
+function salvarEntradas() {
+  try {
+    localStorage.setItem(CHAVE_STORAGE, JSON.stringify(entradas));
+    return true;
+  } catch (erro) {
+    const limiteExcedido = erro && (
+      erro.name === "QuotaExceededError" ||
+      erro.name === "NS_ERROR_DOM_QUOTA_REACHED" ||
+      erro.code === 22 ||
+      erro.code === 1014
+    );
+
+    if (limiteExcedido) {
+      console.error("Não foi possível salvar as entradas: o limite de armazenamento do navegador foi excedido.", erro);
+      alert("Não foi possível salvar. O limite de armazenamento do navegador foi excedido.");
+    } else {
+      console.error("Não foi possível salvar as entradas no localStorage.", erro);
+      alert("Não foi possível salvar as entradas neste navegador.");
+    }
+
+    return false;
+  }
+}
+
+function validarCampos(titulo, descricao, data) {
+  return titulo.trim() !== "" && descricao.trim() !== "" && data.trim() !== "";
+}
+
+function criarEntrada(titulo, descricao, data) {
+  return {
+    id: window.crypto && window.crypto.randomUUID ? window.crypto.randomUUID() : Date.now().toString(),
+    titulo: titulo.trim(),
+    descricao: descricao.trim(),
+    data
+  };
+}
+
+function formatarData(data) {
+  const dataLocal = new Date(`${data}T00:00:00`);
+  return dataLocal.toLocaleDateString("pt-BR");
+}
+
+function criarElementoEntrada(entrada) {
+  const card = document.createElement("article");
+  card.className = "entrada-card";
+
+  const titulo = document.createElement("h3");
+  titulo.textContent = entrada.titulo;
+
+  const data = document.createElement("time");
+  data.className = "entrada-data";
+  data.dateTime = entrada.data;
+  data.textContent = formatarData(entrada.data);
+
+  const descricao = document.createElement("p");
+  descricao.textContent = entrada.descricao;
+
+  const acoes = document.createElement("div");
+  acoes.className = "acoes-entrada";
+
+  const botaoEditar = document.createElement("button");
+  botaoEditar.className = "botao-editar";
+  botaoEditar.type = "button";
+  botaoEditar.textContent = "Editar";
+  botaoEditar.addEventListener("click", () => editarEntrada(entrada.id));
+
+  const botaoRemover = document.createElement("button");
+  botaoRemover.className = "botao-remover";
+  botaoRemover.type = "button";
+  botaoRemover.textContent = "Remover entrada";
+  botaoRemover.addEventListener("click", () => removerEntrada(entrada.id));
+
+  acoes.append(botaoEditar, botaoRemover);
+  card.append(titulo, data, descricao, acoes);
+
+  return card;
+}
+
+function listarEntradas() {
+  listaEntradas.innerHTML = "";
+
+  entradas.forEach((entrada) => {
+    listaEntradas.appendChild(criarElementoEntrada(entrada));
+  });
+}
+
+function limparFormulario() {
+  formEntrada.reset();
+  campoTitulo.focus();
+}
+
+function definirModoCriacao() {
+  entradaEmEdicaoId = null;
+  botaoFormulario.textContent = "Salvar entrada";
+}
+
+function editarEntrada(id) {
+  const entrada = entradas.find((item) => item.id === id);
+
+  if (!entrada) {
+    return;
+  }
+
+  entradaEmEdicaoId = id;
+  campoTitulo.value = entrada.titulo;
+  campoDescricao.value = entrada.descricao;
+  campoData.value = entrada.data;
+  botaoFormulario.textContent = "Atualizar entrada";
+  campoTitulo.focus();
+  formEntrada.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function atualizarEntrada(id, titulo, descricao, data) {
+  const entradasAnteriores = entradas;
+
+  entradas = entradas.map((entrada) => {
+    if (entrada.id !== id) {
+      return entrada;
+    }
+
+    return {
+      ...entrada,
+      titulo: titulo.trim(),
+      descricao: descricao.trim(),
+      data
+    };
+  });
+
+  if (!salvarEntradas()) {
+    entradas = entradasAnteriores;
+    return;
+  }
+
+  listarEntradas();
+  limparFormulario();
+  definirModoCriacao();
+}
+
+function adicionarEntrada(evento) {
+  evento.preventDefault();
+
+  const titulo = campoTitulo.value;
+  const descricao = campoDescricao.value;
+  const data = campoData.value;
+
+  if (!validarCampos(titulo, descricao, data)) {
+    alert("Preencha todos os campos antes de salvar.");
+    return;
+  }
+
+  if (entradaEmEdicaoId) {
+    atualizarEntrada(entradaEmEdicaoId, titulo, descricao, data);
+    return;
+  }
+
+  const novaEntrada = criarEntrada(titulo, descricao, data);
+  entradas.unshift(novaEntrada);
+
+  if (!salvarEntradas()) {
+    entradas = entradas.filter((entrada) => entrada.id !== novaEntrada.id);
+    return;
+  }
+
+  listarEntradas();
+  limparFormulario();
+}
+
+function removerEntrada(id) {
+  const confirmarRemocao = confirm("Tem certeza que deseja excluir esta entrada?");
+
+  if (!confirmarRemocao) {
+    return;
+  }
+
+  const entradasAnteriores = entradas;
+  entradas = entradas.filter((entrada) => entrada.id !== id);
+
+  if (!salvarEntradas()) {
+    entradas = entradasAnteriores;
+    return;
+  }
+
+  if (entradaEmEdicaoId === id) {
+    limparFormulario();
+    definirModoCriacao();
+  }
+
+  listarEntradas();
+}
+
+function registrarServiceWorker() {
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker
+      .register("./service-worker.js")
+      .catch((erro) => {
+        console.error("Não foi possível registrar o Service Worker.", erro);
+      });
+  }
+}
+
+function mostrarBotaoInstalar() {
+  botaoInstalar.hidden = false;
+}
+
+function esconderBotaoInstalar() {
+  botaoInstalar.hidden = true;
+}
+
+async function instalarAplicativo() {
+  if (!eventoInstalacao) {
+    return;
+  }
+
+  eventoInstalacao.prompt();
+  await eventoInstalacao.userChoice;
+
+  eventoInstalacao = null;
+  esconderBotaoInstalar();
+}
+
+function configurarInstalacaoPWA() {
+  window.addEventListener("beforeinstallprompt", (evento) => {
+    evento.preventDefault();
+    eventoInstalacao = evento;
+    mostrarBotaoInstalar();
+  });
+
+  window.addEventListener("appinstalled", () => {
+    eventoInstalacao = null;
+    esconderBotaoInstalar();
+  });
+
+  botaoInstalar.addEventListener("click", instalarAplicativo);
+}
+
+function iniciarAplicacao() {
+  carregarEntradas();
+  listarEntradas();
+  registrarServiceWorker();
+  configurarInstalacaoPWA();
+  formEntrada.addEventListener("submit", adicionarEntrada);
+}
+
+document.addEventListener("DOMContentLoaded", iniciarAplicacao);

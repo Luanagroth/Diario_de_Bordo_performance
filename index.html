@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1f2937">
+  <title>Diário de Bordo</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+  <header>
+    <h1>Diário de Bordo</h1>
+  </header>
+
+  <main>
+    <section aria-labelledby="nova-entrada-titulo">
+      <h2 id="nova-entrada-titulo">Nova entrada</h2>
+
+      <form id="form-entrada">
+        <div>
+          <label for="titulo">Título</label>
+          <input type="text" id="titulo" name="titulo" required>
+        </div>
+
+        <div>
+          <label for="descricao">Descrição</label>
+          <textarea id="descricao" name="descricao" rows="5" required></textarea>
+        </div>
+
+        <div>
+          <label for="data">Data</label>
+          <input type="date" id="data" name="data" required>
+        </div>
+
+        <button type="submit">Salvar entrada</button>
+      </form>
+    </section>
+
+    <section aria-labelledby="entradas-titulo">
+      <h2 id="entradas-titulo">Entradas cadastradas</h2>
+      <div id="lista-entradas" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <button id="botao-instalar" type="button" hidden>Instalar aplicativo</button>
+
+  <script src="script.js"></script>
+</body>
+</html>
